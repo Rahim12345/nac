@@ -30,7 +30,8 @@
     @toastr_css
     @yield('css')
 </head>
-<body class="antialiased theme-dark">
+{{--theme-dark--}}
+<body class="antialiased">
 <input type="hidden" value="{{ env('app_url') }}" id="rootUrl">
 @yield('content')
 <script src="{{ asset('back/dist/js/tabler.min.js') }}"></script>

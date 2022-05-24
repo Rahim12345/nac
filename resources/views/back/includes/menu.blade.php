@@ -18,9 +18,6 @@
                     </div>
                 </a>
                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                    @if(app()->getLocale() != 'az') <span style="margin-left: 12px"><a href="{{ route('lang.swithcher',['locale'=>'az']) }}">AZ</a></span> @endif
-                    @if(app()->getLocale() != 'en') <span style="margin-left: 12px"><a href="{{ route('lang.swithcher',['locale'=>'en']) }}">EN</a></span> @endif
-                    @if(app()->getLocale() != 'ru') <span style="margin-left: 12px"><a href="{{ route('lang.swithcher',['locale'=>'ru']) }}">RU</a></span> @endif
                     <a href="{{ route('back.profile') }}" class="dropdown-item">{{ __('static.profile') }}</a>
                     <a href="{{ route('logout') }}" class="dropdown-item">{{ __('static.logout') }}</a>
                 </div>
@@ -54,10 +51,24 @@
                             </span>
                         </a>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" href="" >
-                                ....
-                            </a>
-                            
+                            <div class="dropdown-menu-columns">
+                                <div class="dropdown-menu-column">
+                                    <div class="dropend">
+                                        <a class="dropdown-item dropdown-toggle" href="#sidebar-authentication" data-bs-toggle="dropdown" role="button" aria-expanded="false">
+                                            Home
+                                        </a>
+                                        <div class="dropdown-menu">
+                                            <a href="{{ route('banner.index') }}" class="dropdown-item">Banner</a>
+                                            <a href="{{ route('mission.index') }}" class="dropdown-item">Mission</a>
+                                            <a href="{{ route('involve.index') }}" class="dropdown-item">Involve</a>
+                                            <a href="{{ route('press.index') }}" class="dropdown-item">Press</a>
+                                            <a href="{{ route('pmission.index') }}" class="dropdown-item">People Mission</a>
+                                            <a href="{{ route('subscribe.index') }}" class="dropdown-item">Subscribe</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
                     </li>
                 </ul>
