@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\File;
 
 Trait FileUploader
 {
-    // $src = $this->fileSave('files/categories/',$request->foto);
+    // $src = $this->fileSave('files/categories/',$request,'inputName');
     public function fileSave($path, $request, $inputName)
     {
         $name = null;

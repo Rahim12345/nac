@@ -18,14 +18,31 @@
             <div class="mb-3 col-md-10 offset-md-1">
                 <form action="{{ route('press.store') }}" method="POST" enctype="multipart/form-data" class="mb-5">
                     @csrf
-                    @if(\App\Helpers\Presses::getOption('src') != '')
-                        <img src="{{ asset('files/press/'.\App\Helpers\Presses::getOption('src')) }}" alt="" style="width: 200px">
-                    @endif
                     <div class="row">
-                        <div class="form-group mb-3 col-md-4">
-                            <label class="form-label" for="src">Photo</label>
+                        <div class="form-group mb-3 col-md-6">
+                            @if(\App\Helpers\Presses::getOption('src') != '')
+                                <img src="{{ asset('files/press/'.\App\Helpers\Presses::getOption('src')) }}" alt="" style="width: 200px">
+                            @endif
+                        </div>
+                        <div class="form-group mb-3 col-md-6">
+                            @if(\App\Helpers\Presses::getOption('src_mobile') != '')
+                                <img src="{{ asset('files/press/'.\App\Helpers\Presses::getOption('src_mobile')) }}" alt="" style="width: 200px">
+                            @endif
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group mb-3 col-md-6">
+                            <label class="form-label" for="src">Photo(destkop)</label>
                             <input type="file" class="form-control @error('src') is-invalid  @enderror" id="src" name="src">
                             @error('src')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                        <div class="form-group mb-3 col-md-6">
+                            <label class="form-label" for="src_mobile">Photo(mobile)</label>
+                            <input type="file" class="form-control @error('src_mobile') is-invalid  @enderror" id="src_mobile" name="src_mobile">
+                            @error('src_mobile')
                             <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
@@ -42,22 +59,6 @@
                             <label class="form-label" for="title_1_en">Title(EN)</label>
                             <input type="text" class="form-control @error('title_1_en') is-invalid  @enderror" name="title_1_en" id="title_1_en" value="{{ old('title_1_en',\App\Helpers\Presses::getOption('title_1_en')) }}">
                             @error('title_1_en')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
-
-                        <div class="form-group mb-3 col-md-4">
-                            <label class="form-label" for="text_az">Text(AZ)</label>
-                            <input type="text" class="form-control @error('text_az') is-invalid  @enderror" name="text_az" id="text_az" value="{{ old('text_az',\App\Helpers\Presses::getOption('text_az')) }}">
-                            @error('text_az')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
-
-                        <div class="form-group mb-3 col-md-4">
-                            <label class="form-label" for="text_en">Text(EN)</label>
-                            <input type="text" class="form-control @error('text_en') is-invalid  @enderror" name="text_en" id="text_en" value="{{ old('text_en',\App\Helpers\Presses::getOption('text_en')) }}">
-                            @error('text_en')
                             <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
@@ -84,6 +85,22 @@
                             <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
+
+                        <div class="form-group mb-3 col-md-6">
+                            <label class="form-label" for="text_az">Text(AZ)</label>
+                            <textarea name="text_az" id="text_az" class="form-control @error('text_az') is-invalid  @enderror" cols="30" rows="4">{{ old('text_az',\App\Helpers\Presses::getOption('text_az')) }}</textarea>
+                            @error('text_az')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                        <div class="form-group mb-3 col-md-6">
+                            <label class="form-label" for="text_en">Text(EN)</label>
+                            <textarea name="text_en" id="text_en" class="form-control @error('text_en') is-invalid  @enderror" cols="30" rows="4">{{ old('text_en',\App\Helpers\Presses::getOption('text_en')) }}</textarea>
+                            @error('text_en')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
                     </div>
                     <div class="form-group mb-3">
                         <button class="btn btn-primary float-end">ADD</button>
@@ -96,6 +113,43 @@
 @endsection
 
 @section('js')
+    <script src="{{ asset('ckeditor/ckeditor.js') }}"></script>
+    <script>
+        $(document).ready(function () {
+            CKEDITOR.replace('text_az',{
+                language: '{{ app()->getLocale() }}',
+                filebrowserImageBrowseUrl: $('#rootUrl').val()+'/laravel-filemanager?type=Images',
+                filebrowserImageUploadUrl: $('#rootUrl').val()+'/laravel-filemanager/upload?type=Images&_token={!! csrf_token() !!}',
+                filebrowserBrowseUrl: $('#rootUrl').val()+'/laravel-filemanager?type=Files',
+                filebrowserUploadUrl: $('#rootUrl').val()+'/laravel-filemanager/upload?type=Files&_token={!! csrf_token() !!}',
+                toolbarGroups :[
+                    { name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ] },
+                    { name: 'paragraph',   groups: [ 'list', 'indent', 'blocks', 'align', 'bidi' ] },
+                    { name: 'insert' },
+                    { name: 'forms' },
+                    { name: 'styles' },
+                    { name: 'colors' },
+                    { name: 'tools'}
+                ],
+            });
 
+            CKEDITOR.replace('text_en',{
+                language: '{{ app()->getLocale() }}',
+                filebrowserImageBrowseUrl: $('#rootUrl').val()+'/laravel-filemanager?type=Images',
+                filebrowserImageUploadUrl: $('#rootUrl').val()+'/laravel-filemanager/upload?type=Images&_token={!! csrf_token() !!}',
+                filebrowserBrowseUrl: $('#rootUrl').val()+'/laravel-filemanager?type=Files',
+                filebrowserUploadUrl: $('#rootUrl').val()+'/laravel-filemanager/upload?type=Files&_token={!! csrf_token() !!}',
+                toolbarGroups :[
+                    { name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ] },
+                    { name: 'paragraph',   groups: [ 'list', 'indent', 'blocks', 'align', 'bidi' ] },
+                    { name: 'insert' },
+                    { name: 'forms' },
+                    { name: 'styles' },
+                    { name: 'colors' },
+                    { name: 'tools'}
+                ],
+            });
+        });
+    </script>
 @endsection
 

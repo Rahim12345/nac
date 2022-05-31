@@ -42,11 +42,11 @@ class PressController extends Controller
         {
             if ($key != '_token')
             {
-                if ($key == 'src')
+                if ($key == 'src' || $key == 'src_mobile')
                 {
-                    $src = $this->fileSave('files/press/', $request,'src');
+                    $src = $this->fileSave('files/press/', $request,$key);
                     Press::updateOrCreate(
-                        ['key'   => 'src'],
+                        ['key'   => $key],
                         [
                             'value' => $src
                         ]

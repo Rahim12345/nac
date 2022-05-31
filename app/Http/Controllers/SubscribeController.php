@@ -42,11 +42,11 @@ class SubscribeController extends Controller
         {
             if ($key != '_token')
             {
-                if ($key == 'src')
+                if ($key == 'src' || $key == 'src_mobile')
                 {
-                    $src = $this->fileSave('files/subscribe/', $request,'src');
+                    $src = $this->fileSave('files/subscribe/', $request,$key);
                     Subscribe::updateOrCreate(
-                        ['key'   => 'src'],
+                        ['key'   => $key],
                         [
                             'value' => $src
                         ]

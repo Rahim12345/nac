@@ -53,6 +53,9 @@
                         <div class="dropdown-menu">
                             <div class="dropdown-menu-columns">
                                 <div class="dropdown-menu-column">
+                                    <a class="dropdown-item" href="{{ route('menu.index') }}" >
+                                        Menu Editing
+                                    </a>
                                     <div class="dropend">
                                         <a class="dropdown-item dropdown-toggle" href="#sidebar-authentication" data-bs-toggle="dropdown" role="button" aria-expanded="false">
                                             Home
@@ -66,9 +69,61 @@
                                             <a href="{{ route('subscribe.index') }}" class="dropdown-item">Subscribe</a>
                                         </div>
                                     </div>
+
+                                    <div class="dropend">
+                                        <a class="dropdown-item dropdown-toggle" href="#sidebar-authentication" data-bs-toggle="dropdown" role="button" aria-expanded="false">
+                                            WE ARE N.A.C
+                                        </a>
+                                        <div class="dropdown-menu">
+                                            <a href="{{ route('back.who',['section'=>'section_one']) }}" class="dropdown-item">Who we are</a>
+                                            <a href="{{ route('back.who',['section'=>'section_two']) }}" class="dropdown-item">Our-story SECTION</a>
+                                            <a href="{{ route('back.who',['section'=>'section_three']) }}" class="dropdown-item">Our-vision SECTION</a>
+                                            <a href="{{ route('back.who',['section'=>'section_four']) }}" class="dropdown-item">Our-mission SECTION</a>
+                                            <a href="{{ route('back.statistics') }}" class="dropdown-item">Statistics SECTION</a>
+                                            <a href="{{ route('moment.index') }}" class="dropdown-item">Some moments of N.A.C.</a>
+                                            <a href="{{ route('back.flag.part') }}" class="dropdown-item">Flag part SECTION</a>
+                                        </div>
+                                    </div>
+
+                                    <div class="dropend">
+                                        <a class="dropdown-item dropdown-toggle" href="#navbar-layout" data-bs-toggle="dropdown" role="button" aria-expanded="false" >
+                                            OUR ADVOCACY
+                                        </a>
+                                        <div class="dropdown-menu">
+                                            <div class="dropdown-menu-columns">
+                                                <div class="dropdown-menu-column">
+                                                    <a class="dropdown-item" href="javascript: void(0)" >
+                                                        <b>Current Issues</b>
+                                                    </a>
+                                                    <a class="dropdown-item" href="{{ route('current-issues-banner.index') }}" >
+                                                        Banner
+                                                    </a>
+                                                    <a class="dropdown-item" href="{{ route('current-issues-category.index') }}" >
+                                                        Categories
+                                                    </a>
+                                                </div>
+                                                <div class="dropdown-menu-column">
+                                                    <a class="dropdown-item" href="javascript: void(0)" >
+                                                        <b>Take action</b>
+                                                    </a>
+                                                    <a class="dropdown-item" href="./layout-navbar-sticky.html" >
+                                                        Banner
+                                                    </a>
+                                                    <a class="dropdown-item" href="./layout-navbar-overlap.html" >
+                                                        Add Articles
+                                                    </a>
+                                                </div>
+                                                <div class="dropdown-menu-column">
+                                                    <a class="dropdown-item" href="javascript: void(0)" >
+                                                        <b>Find your representative</b>
+                                                    </a>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-
                         </div>
                     </li>
                 </ul>

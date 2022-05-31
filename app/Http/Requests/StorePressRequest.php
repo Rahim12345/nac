@@ -25,10 +25,11 @@ class StorePressRequest extends FormRequest
     {
         return [
             'src'=>'nullable|image|max:2048',
+            'src_mobile'=>'nullable|image|max:2048',
             'title_1_az'=>'nullable|max:255',
             'title_1_en'=>'nullable|max:255',
-            'text_az'=>'nullable|max:255',
-            'text_en'=>'nullable|max:255',
+            'text_az'=>'nullable|max:10000',
+            'text_en'=>'nullable|max:10000',
             'button_az'=>'nullable|max:255',
             'button_en'=>'nullable|max:255',
             'link'=>'nullable|url|max:255'
@@ -38,7 +39,8 @@ class StorePressRequest extends FormRequest
     public function attributes()
     {
         return [
-            'src'=>'Photo',
+            'src'=>'Photo(destkop)',
+            'src_mobile'=>'Photo(mobile)',
             'title_1_az'=>'Title(AZ)',
             'title_1_en'=>'Title(EN)',
             'text_az'=>'Text(AZ)',

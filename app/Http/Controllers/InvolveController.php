@@ -42,11 +42,11 @@ class InvolveController extends Controller
         {
             if ($key != '_token')
             {
-                if ($key == 'src')
+                if ($key == 'src' || $key == 'src_mobile')
                 {
-                    $src = $this->fileSave('files/involve/', $request,'src');
+                    $src = $this->fileSave('files/involve/', $request,$key);
                     Involve::updateOrCreate(
-                        ['key'   => 'src'],
+                        ['key'   => $key],
                         [
                             'value' => $src
                         ]

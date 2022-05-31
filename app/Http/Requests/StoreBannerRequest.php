@@ -27,8 +27,8 @@ class StoreBannerRequest extends FormRequest
             'src'=>'nullable|image|max:2048',
             'title_az'=>'nullable|max:255',
             'title_en'=>'nullable|max:255',
-            'text_az'=>'nullable|max:255',
-            'text_en'=>'nullable|max:255',
+            'text_az'=>'nullable|max:10000',
+            'text_en'=>'nullable|max:10000',
             'button_az'=>'nullable|max:255',
             'button_en'=>'nullable|max:255',
             'link'=>'nullable|url|max:255'

@@ -42,11 +42,11 @@ class MissionController extends Controller
         {
             if ($key != '_token')
             {
-                if ($key == 'src')
+                if ($key == 'src' || $key == 'src_mobile')
                 {
-                    $src = $this->fileSave('files/mission/', $request,'src');
+                    $src        = $this->fileSave('files/mission/', $request,$key);
                     Mission::updateOrCreate(
-                        ['key'   => 'src'],
+                        ['key'   => $key],
                         [
                             'value' => $src
                         ]

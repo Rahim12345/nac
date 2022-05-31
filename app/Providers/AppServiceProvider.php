@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Models\Menu;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -23,6 +25,14 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        $menus          = [];
+        if (Schema::hasTable('menus'))
+        {
+            $menus = Menu::all();
+        }
+
+        return view()->share([
+            'menus'=>$menus
+        ]);
     }
 }
