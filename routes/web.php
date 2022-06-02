@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BlogController;
 use App\Http\Controllers\front\PagesController;
 use Illuminate\Support\Facades\Route;
 use UniSharp\LaravelFilemanager\Lfm;
@@ -65,6 +66,13 @@ Route::group(['prefix'=>'admin','middleware'=>['auth', 'en_locale']],function ()
 
     Route::post('flag-part',[App\Http\Controllers\WhoController::class, 'flagPartPost'])
         ->name('back.flag.part.post');
+
+    Route::get('page-banner/{key}',[App\Http\Controllers\OptionController::class, 'pageBanner'])
+        ->name('back.page.banner');
+
+    Route::post('page-banner-post',[App\Http\Controllers\OptionController::class, 'pageBannerPost'])
+        ->name('back.page.banner.post');
+
 //    Who are N.A.C end
 //    OUR ADVOCACY start
     //    Current issues start
@@ -72,6 +80,9 @@ Route::group(['prefix'=>'admin','middleware'=>['auth', 'en_locale']],function ()
     Route::resource('current-issues-category',App\Http\Controllers\CurrentIssuesCategoryController::class);
     //    Current issues start
 //    OUR ADVOCACY end
+
+    Route::get('blog/{id}',[BlogController::class,'blogIndex'])
+        ->name('blog.index');
 });
 
 

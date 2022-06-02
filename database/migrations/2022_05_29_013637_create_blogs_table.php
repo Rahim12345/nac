@@ -25,6 +25,7 @@ class CreateBlogsTable extends Migration
             $table->text('intro_text_en')->nullable();
             $table->text('text_az')->nullable();
             $table->text('text_en')->nullable();
+            $table->boolean('past')->default(0)->comment('0 - current, 1 - past');
             $table->integer('hits')->default(0);
             $table->timestamps();
 

@@ -106,10 +106,10 @@
                                                     <a class="dropdown-item" href="javascript: void(0)" >
                                                         <b>Take action</b>
                                                     </a>
-                                                    <a class="dropdown-item" href="./layout-navbar-sticky.html" >
+                                                    <a class="dropdown-item" href="{{ route('back.page.banner',['key'=>'take_action_banner']) }}" >
                                                         Banner
                                                     </a>
-                                                    <a class="dropdown-item" href="./layout-navbar-overlap.html" >
+                                                    <a class="dropdown-item" href="{{ route('blog.index',['id'=>4]) }}" >
                                                         Add Articles
                                                     </a>
                                                 </div>
@@ -122,6 +122,74 @@
                                             </div>
                                         </div>
                                     </div>
+
+                                    <div class="dropend">
+                                        <a class="dropdown-item dropdown-toggle" href="#navbar-layout" data-bs-toggle="dropdown" role="button" aria-expanded="false" >
+                                            PRESS CENTRE
+                                        </a>
+                                        <div class="dropdown-menu">
+                                            <div class="dropdown-menu-columns">
+                                                <div class="dropdown-menu-column">
+                                                    <a class="dropdown-item" href="javascript: void(0)" >
+                                                        <b>Statements</b>
+                                                    </a>
+                                                    <a class="dropdown-item" href="{{ route('back.page.banner',['key'=>'statements_banner']) }}" >
+                                                        Banner
+                                                    </a>
+
+                                                </div>
+                                                <div class="dropdown-menu-column">
+                                                    <a class="dropdown-item" href="javascript: void(0)" >
+                                                        <b>Media</b>
+                                                    </a>
+
+
+                                                </div>
+                                                <div class="dropdown-menu-column">
+                                                    <a class="dropdown-item" href="javascript: void(0)" >
+                                                        <b>Community updates</b>
+                                                    </a>
+                                                    <a class="dropdown-item" href="{{ route('back.page.banner',['key'=>'community_banner']) }}" >
+                                                        Banner
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="dropend">
+                                        <a class="dropdown-item dropdown-toggle" href="#navbar-layout" data-bs-toggle="dropdown" role="button" aria-expanded="false" >
+                                            GET INVOLVED
+                                        </a>
+                                        <div class="dropdown-menu">
+                                            <div class="dropdown-menu-columns">
+                                                <div class="dropdown-menu-column">
+                                                    <a class="dropdown-item" href="javascript: void(0)" >
+                                                        <b>Become a member</b>
+                                                    </a>
+                                                    <a class="dropdown-item" href="{{ route('back.page.banner',['key'=>'become_a_member_banner']) }}" >
+                                                        Banner
+                                                    </a>
+
+                                                </div>
+                                                <div class="dropdown-menu-column">
+                                                    <a class="dropdown-item" href="javascript: void(0)" >
+                                                        <b>Volunteer at NAC</b>
+                                                    </a>
+                                                    <a class="dropdown-item" href="{{ route('back.page.banner',['key'=>'volunteer_banner']) }}" >
+                                                        Banner
+                                                    </a>
+                                                </div>
+                                                <div class="dropdown-menu-column">
+                                                    <a class="dropdown-item" href="javascript: void(0)" >
+                                                        <b>Become a supporter</b>
+                                                    </a>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
                                 </div>
                             </div>
                         </div>

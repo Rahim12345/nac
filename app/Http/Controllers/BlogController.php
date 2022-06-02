@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Blog;
 use App\Http\Requests\StoreBlogRequest;
 use App\Http\Requests\UpdateBlogRequest;
+use App\Models\Menu;
 
 class BlogController extends Controller
 {
@@ -82,5 +83,12 @@ class BlogController extends Controller
     public function destroy(Blog $blog)
     {
         //
+    }
+
+    public function blogIndex($id)
+    {
+        $menu = Menu::findOrFail($id);
+
+        dd($menu);
     }
 }

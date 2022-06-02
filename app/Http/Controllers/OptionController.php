@@ -6,9 +6,12 @@ use App\Helpers\Options;
 use App\Models\Option;
 use App\Http\Requests\StoreOptionRequest;
 use App\Http\Requests\UpdateOptionRequest;
+use App\Traits\FileUploader;
+use Illuminate\Http\Request;
 
 class OptionController extends Controller
 {
+    use FileUploader;
     /**
      * Display a listing of the resource.
      *
@@ -135,5 +138,48 @@ class OptionController extends Controller
     public function destroy(Option $option)
     {
         //
+    }
+
+    public function pageBanner($key)
+    {
+        return view('back.pages.page-banners.banner', compact('key'));
+    }
+
+    public function pageBannerPost(Request $request)
+    {
+        $this->validate($request,[
+            'src'=>'nullable|max:10000',
+            'title_az'=>'nullable|max:10000',
+            'title_en'=>'nullable|max:10000',
+        ]);
+
+        foreach ($request->keys() as $key)
+        {
+            if ($key != '_token' && $key != 'key')
+            {
+                if ($key == 'src')
+                {
+                    $src = $this->fileSave('files/pages-banners/',$request,'src');
+                    Option::updateOrCreate(
+                        ['key'   => $request->post('key').'_'.$key],
+                        [
+                            'value' => $src
+                        ]
+                    );
+                }
+                else
+                {
+                    Option::updateOrCreate(
+                        ['key'   => $request->post('key').'_'.$key],
+                        [
+                            'value' => $request->post($key)
+                        ]
+                    );
+                }
+            }
+        }
+
+        toastSuccess('Data added successfully');
+        return redirect()->back();
     }
 }
