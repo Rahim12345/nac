@@ -21,6 +21,23 @@ Trait FileUploader
         return $name;
     }
 
+    // $this->multiFileSave('files/categories/', $request, 'src');
+    public function multiFileSave($path, $request, $inputName)
+    {
+        $names = [];
+        if ($request->hasFile($inputName))
+        {
+            foreach($request->file($inputName) as $file)
+            {
+                $name   = $file->hashName();
+                $file->move(public_path($path), $name);
+                $names[] = $name;
+            }
+
+        }
+        return $names;
+    }
+
     // $this->fileDelete('files/categories/'.$category->src);
     public function fileDelete($path)
     {

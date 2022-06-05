@@ -35,6 +35,7 @@
                             @enderror
                         </div>
 
+                        @if(request()->segment(3) != 'statements_banner')
                         <div class="form-group mb-3 col-md-6">
                             <label class="form-label" for="title_az">Title(AZ)</label>
                             <textarea class="form-control @error('title_az') is-invalid  @enderror" name="title_az" id="title_az" cols="30" rows="4">{{ old('title_az',\App\Helpers\Options::getOption($key.'_title_az')) }}</textarea>
@@ -50,6 +51,7 @@
                             <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
+                        @endif
                     </div>
                     <div class="form-group mb-3">
                         <button class="btn btn-primary float-end">ADD</button>
@@ -62,6 +64,7 @@
 @endsection
 
 @section('js')
+    @if(request()->segment(3) != 'statements_banner')
     <script src="{{ asset('ckeditor/ckeditor.js') }}"></script>
     <script>
         $(document).ready(function () {
@@ -100,5 +103,6 @@
             });
         });
     </script>
+    @endif
 @endsection
 

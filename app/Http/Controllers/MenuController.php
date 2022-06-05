@@ -148,7 +148,7 @@ class MenuController extends Controller
             ]);
         }
 
-        toastSuccess('Data added successfully');
+        toastSuccess('Data updated successfully');
         return redirect()->route('menu.index');
     }
 
@@ -175,6 +175,17 @@ class MenuController extends Controller
         $menu->delete();
 
         toastSuccess('Data deleted successfully');
+        return redirect()->route('menu.index');
+    }
+
+    public function shown($id)
+    {
+        $menu = Menu::findOrFail($id);
+        $menu->update([
+            'shown'=>$menu->shown ? 0 : 1
+        ]);
+
+        toastSuccess('Status changed successfully');
         return redirect()->route('menu.index');
     }
 }

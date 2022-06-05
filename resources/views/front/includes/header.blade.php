@@ -2,6 +2,7 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ env('APP_NAME') }} - @yield('title')</title>
@@ -101,10 +102,12 @@
                                         <ul class="dropdown-menu dropdown_menu" aria-labelledby="navbarDropdown">
                                             @foreach($menu->children as $sub_menu)
                                             <li class="dropdown_li">
+                                                @if($sub_menu->shown)
                                                 @if(filter_var($sub_menu->{'slug_'.app()->getLocale()}, FILTER_VALIDATE_URL))
                                                     <a class="dropdown-item dropdown_item" href="{{ $sub_menu->{'slug_'.app()->getLocale()} }}">{{ $sub_menu->{'menu_'.app()->getLocale()} }}</a>
                                                 @else
                                                     <a class="dropdown-item dropdown_item" href="{{ route('front.menu',['slug'=>$sub_menu->{'slug_'.app()->getLocale()}]) }}">{{ $sub_menu->{'menu_'.app()->getLocale()} }}</a>
+                                                @endif
                                                 @endif
                                             </li>
                                             @endforeach
@@ -112,62 +115,21 @@
                                     </li>
                                 @endif
                             @endforeach
-{{--                            <li class="nav-item nav_item li_hover">--}}
-{{--                                <a href="{{ route('front.who.we.are') }}" class="nav-link nav_link">--}}
-{{--                                    WE ARE N.A.C </a>--}}
-{{--                            </li>--}}
-{{--                            <li class="nav-item nav_item dropdown li_hover">--}}
-{{--                                <a class="nav-link nav_link dropdown-toggle" id="navbarDropdown" role="button"--}}
-{{--                                   data-bs-toggle="dropdown" aria-expanded="false">OUR ADVOCACY</a>--}}
-{{--                                <ul class="dropdown-menu dropdown_menu" aria-labelledby="navbarDropdown">--}}
-
-{{--                                    <li class="dropdown_li"><a class="dropdown-item dropdown_item"--}}
-{{--                                                               href="{{ route('front.current.issues') }}">Current issues</a></li>--}}
-
-{{--                                    <li class="dropdown_li"><a class="dropdown-item dropdown_item" href="take-action.html">Take action</a></li>--}}
-
-{{--                                    <li class="dropdown_li"><a class="dropdown-item dropdown_item" target="_blank" href="https://www.ourcommons.ca/members/">Find your representative</a></li>--}}
-
-
-{{--                                </ul>--}}
-{{--                            </li>--}}
-{{--                            <li class="nav-item nav_item dropdown li_hover">--}}
-{{--                                <a class="nav-link nav_link dropdown-toggle" id="navbarDropdown" role="button"--}}
-{{--                                   data-bs-toggle="dropdown" aria-expanded="false">Press centre</a>--}}
-{{--                                <ul class="dropdown-menu dropdown_menu" aria-labelledby="navbarDropdown">--}}
-{{--                                    <li class="dropdown_li"><a class="dropdown-item dropdown_item" href="statements.html">Statements</a></li>--}}
-{{--                                    <li class="dropdown_li"><a class="dropdown-item dropdown_item"--}}
-{{--                                                               href="media.html">Media</a></li>--}}
-{{--                                    <li class="dropdown_li"><a class="dropdown-item dropdown_item" href="community-updates.html">Community updates</a></li>--}}
-{{--                                </ul>--}}
-{{--                            </li>--}}
-{{--                            <li class="nav-item nav_item dropdown li_hover">--}}
-{{--                                <a class="nav-link nav_link dropdown-toggle" id="navbarDropdown" role="button"--}}
-{{--                                   data-bs-toggle="dropdown" aria-expanded="false">get involved</a>--}}
-{{--                                <ul class="dropdown-menu dropdown_menu" aria-labelledby="navbarDropdown">--}}
-{{--                                    <li class="dropdown_li"><a class="dropdown-item dropdown_item"--}}
-{{--                                                               href="become-member.html">Become a member</a></li>--}}
-{{--                                    <li class="dropdown_li"><a class="dropdown-item dropdown_item"--}}
-{{--                                                               href="volunteer.html">Volunteer at NAC</a></li>--}}
-{{--                                    <li class="dropdown_li"><a class="dropdown-item dropdown_item" target="_blank"--}}
-{{--                                                               href="https://www.paypal.com/donate/?hosted_button_id=Q8M8MCEKWKBXQ">Become a supporter</a></li>--}}
-{{--                                </ul>--}}
-{{--                            </li>--}}
                             <li class="nav-item nav_item dropdown li_hover contact">
                                 <a class="nav-link nav_link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">contact us</a>
                                 <ul class="dropdown-menu dropdown_menu" aria-labelledby="navbarDropdown">
-                                    <li class="dropdown_li"><a class="menu_info" href="mailto:azcanet@gmail.com">Email: azcanet@gmail.com</a></li>
-                                    <li class="dropdown_li"><a class="menu_info" href="tel:+1234567890">Phone: +1234567890</a></li>
-                                    <li class="dropdown_li"><a class="menu_info address" href="#">Address: 1111 Finch Avenue West, Unit 218 Toronto, ON, Canada</a></li>
+                                    <li class="dropdown_li"><a class="menu_info" href="mailto:{{ \App\Helpers\Options::getOption('email') }}">Email: {{ \App\Helpers\Options::getOption('email') }}</a></li>
+                                    <li class="dropdown_li"><a class="menu_info" href="tel:{{ \App\Helpers\Options::getOption('tel') }}">Phone: {{ \App\Helpers\Options::getOption('tel') }}</a></li>
+                                    <li class="dropdown_li"><a class="menu_info address" href="#">Address: {{ \App\Helpers\Options::getOption('unvan_'.app()->getLocale()) }}</a></li>
                                     <ul class="social_ul">
                                         <li class="social_li">
-                                            <a target="_blank" href="https://www.facebook.com/azcanet/" class="social_link"><i class="fa-brands fa-facebook"></i></a>
+                                            <a target="_blank" href="{{ \App\Helpers\Options::getOption('facebook') }}" class="social_link"><i class="fa-brands fa-facebook"></i></a>
                                         </li>
                                         <li class="social_li">
-                                            <a target="_blank" href="https://www.instagram.com/azcanet/" class="social_link"><i class="fa-brands fa-instagram"></i></a>
+                                            <a target="_blank" href="{{ \App\Helpers\Options::getOption('instagram') }}" class="social_link"><i class="fa-brands fa-instagram"></i></a>
                                         </li>
                                         <li class="social_li">
-                                            <a target="_blank" href="https://www.youtube.com/c/azcanet" class="social_link"><i class="fa-brands fa-youtube"></i></a>
+                                            <a target="_blank" href="{{ \App\Helpers\Options::getOption('youtube') }}" class="social_link"><i class="fa-brands fa-youtube"></i></a>
                                         </li>
                                     </ul>
                                 </ul>

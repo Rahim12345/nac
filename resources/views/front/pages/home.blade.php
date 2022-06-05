@@ -120,115 +120,19 @@
                     <div class="press-blogs swiper-container">
 
                         <div class="swiper-wrapper">
+                            @foreach($news as $blog)
                             <div class="press_blog swiper-slide col-lg-3 col-md-6 col-sm-6" onclick="media('media.html')">
                                 <div class="imag">
-                                    <img src="{{ asset('nac') }}/img/press-image1.png" alt="">
+                                    <img src="{{ $blog->cover === null ? '' : asset('files/blogs/'.$blog->cover->src) }}" alt="">
                                     <div class="date">
-                                        24 sep,2021
+                                        {{ Carbon\Carbon::parse($blog->created_at)->format('j  M, Y') }}
                                     </div>
                                 </div>
                                 <div class="content">
-                                    <p>Azerbaijan asks Armenia to stop laying landmines in second case to...</p>
-                                </div>
-
-                            </div>
-
-                            <div class="press_blog swiper-slide col-lg-3 col-md-6 col-sm-6" onclick="media('media.html')">
-                                <div class="imag">
-                                    <img src="{{ asset('nac') }}/img/press-image2.png" alt="">
-                                    <div class="date">
-                                        24 sep,2021
-                                    </div>
-                                </div>
-                                <div class="content">
-                                    <p>George “Congratulations Azerbaijan”</p>
+                                    <p>{!! mb_strlen($blog->{'title_'.app()->getLocale()}) > 60 ? mb_substr($blog->{'title_'.app()->getLocale()},0,60).'...' : $blog->{'title_'.app()->getLocale()} !!}</p>
                                 </div>
                             </div>
-
-                            <div class="press_blog swiper-slide col-lg-3 col-md-6 col-sm-6" onclick="media('media.html')">
-                                <div class="imag">
-                                    <img src="{{ asset('nac') }}/img/press-image3.png" alt="">
-                                    <div class="date">
-                                        24 sep,2021
-                                    </div>
-                                </div>
-                                <div class="content">
-                                    <p>Restoration of Independence in Azerbaijan</p>
-                                </div>
-                            </div>
-
-                            <div class="press_blog swiper-slide col-lg-3 col-md-6 col-sm-6" onclick="media('media.html')">
-                                <div class="imag">
-                                    <img src="{{ asset('nac') }}/img/press-image1.png" alt="">
-                                    <div class="date">
-                                        24 sep,2021
-                                    </div>
-                                </div>
-                                <div class="content">
-                                    <p>Another missile, another war crime</p>
-                                </div>
-                            </div>
-
-                            <div class="press_blog swiper-slide col-lg-3 col-md-6 col-sm-6" onclick="media('media.html')">
-                                <div class="imag">
-                                    <img {{ asset('nac') }}/img/press-image1.png" alt="">
-                                    <div class="date">
-                                        24 sep,2021
-                                    </div>
-                                </div>
-                                <div class="content">
-                                    <p>Azerbaijan asks Armenia to stop laying landmines in second case to...</p>
-                                </div>
-
-                            </div>
-                            <div class="press_blog swiper-slide col-lg-3 col-md-6 col-sm-6" onclick="media('media.html')">
-                                <div class="imag">
-                                    <img {{ asset('nac') }}/img/press-image1.png" alt="">
-                                    <div class="date">
-                                        24 sep,2021
-                                    </div>
-                                </div>
-                                <div class="content">
-                                    <p>Azerbaijan asks Armenia to stop laying landmines in second case to...</p>
-                                </div>
-
-                            </div>
-                            <div class="press_blog swiper-slide col-lg-3 col-md-6 col-sm-6" onclick="media('media.html')">
-                                <div class="imag">
-                                    <img {{ asset('nac') }}/img/press-image1.png" alt="">
-                                    <div class="date">
-                                        24 sep,2021
-                                    </div>
-                                </div>
-                                <div class="content">
-                                    <p>Azerbaijan asks Armenia to stop laying landmines in second case to...</p>
-                                </div>
-
-                            </div>
-                            <div class="press_blog swiper-slide col-lg-3 col-md-6 col-sm-6" onclick="media('media.html')">
-                                <div class="imag">
-                                    <img {{ asset('nac') }}/img/press-image1.png" alt="">
-                                    <div class="date">
-                                        24 sep,2021
-                                    </div>
-                                </div>
-                                <div class="content">
-                                    <p>Azerbaijan asks Armenia to stop laying landmines in second case to...</p>
-                                </div>
-
-                            </div>
-                            <div class="press_blog swiper-slide col-lg-3 col-md-6 col-sm-6" onclick="media('media.html')">
-                                <div class="imag">
-                                    <img {{ asset('nac') }}/img/press-image1.png" alt="">
-                                    <div class="date">
-                                        24 sep,2021
-                                    </div>
-                                </div>
-                                <div class="content">
-                                    <p>Azerbaijan asks Armenia to stop laying landmines in second case to...</p>
-                                </div>
-
-                            </div>
+                            @endforeach
                         </div>
                     </div>
                     <div class="more ">

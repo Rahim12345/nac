@@ -109,7 +109,7 @@
                                                     <a class="dropdown-item" href="{{ route('back.page.banner',['key'=>'take_action_banner']) }}" >
                                                         Banner
                                                     </a>
-                                                    <a class="dropdown-item" href="{{ route('blog.index',['id'=>4]) }}" >
+                                                    <a class="dropdown-item" href="{{ route('blog.list',['menu_id'=>4]) }}" >
                                                         Add Articles
                                                     </a>
                                                 </div>
@@ -136,13 +136,21 @@
                                                     <a class="dropdown-item" href="{{ route('back.page.banner',['key'=>'statements_banner']) }}" >
                                                         Banner
                                                     </a>
+                                                    <a class="dropdown-item" href="{{ route('blog.list',['menu_id'=>7]) }}" >
+                                                        Add Articles
+                                                    </a>
 
                                                 </div>
                                                 <div class="dropdown-menu-column">
                                                     <a class="dropdown-item" href="javascript: void(0)" >
                                                         <b>Media</b>
                                                     </a>
-
+                                                    <a class="dropdown-item" href="{{ route('media.text') }}" >
+                                                        Media and news
+                                                    </a>
+                                                    <a class="dropdown-item" href="{{ route('blog.list',['menu_id'=>8]) }}" >
+                                                        Add Articles
+                                                    </a>
 
                                                 </div>
                                                 <div class="dropdown-menu-column">
@@ -151,6 +159,9 @@
                                                     </a>
                                                     <a class="dropdown-item" href="{{ route('back.page.banner',['key'=>'community_banner']) }}" >
                                                         Banner
+                                                    </a>
+                                                    <a class="dropdown-item" href="{{ route('blog.list',['menu_id'=>9]) }}" >
+                                                        Add Articles
                                                     </a>
                                                 </div>
                                             </div>
@@ -170,6 +181,13 @@
                                                     <a class="dropdown-item" href="{{ route('back.page.banner',['key'=>'become_a_member_banner']) }}" >
                                                         Banner
                                                     </a>
+                                                    <a class="dropdown-item" href="{{ route('become.member.text') }}" >
+                                                        N.A.C and You!
+                                                    </a>
+                                                    <a class="dropdown-item" href="{{ route('membership.index') }}" >
+                                                        Membership options
+                                                    </a>
+
 
                                                 </div>
                                                 <div class="dropdown-menu-column">
@@ -178,6 +196,9 @@
                                                     </a>
                                                     <a class="dropdown-item" href="{{ route('back.page.banner',['key'=>'volunteer_banner']) }}" >
                                                         Banner
+                                                    </a>
+                                                    <a class="dropdown-item" href="{{ route('blog.list',['menu_id'=>12]) }}" >
+                                                        Add Articles
                                                     </a>
                                                 </div>
                                                 <div class="dropdown-menu-column">

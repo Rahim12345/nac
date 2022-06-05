@@ -16,15 +16,24 @@ Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web']], funct
 Route::group(['middleware'=>['locale']],function (){
     Route::get('/', [PagesController::class,'home'])
         ->name('front.home');
-
-//    Route::get('/who-we-are', [PagesController::class,'whoWeAre'])
-//        ->name('front.who.we.are');
-//
-//    Route::get('/current-issues', [PagesController::class,'currentIssues'])
-//        ->name('front.current.issues');
+    Route::post('/subscribe', [PagesController::class,'subscribe'])->name('front.subscribe');
 
     Route::get('/menu/{slug}', [PagesController::class,'Menu'])
         ->name('front.menu');
+
+    Route::post('blog-loader', [PagesController::class, 'blogLoader'])
+        ->name('blog.loader');
+
+    Route::get('take-action-details/{slug}', [PagesController::class, 'takeActionDetails'])
+        ->name('take.action.details');
+    Route::get('statements-details/{slug}', [PagesController::class, 'statementsDetails'])
+        ->name('statements.details');
+    Route::get('community-updates-details/{slug}', [PagesController::class, 'communityUpdatesDetails'])
+        ->name('community.updates.details');
+    Route::get('volunteer-details/{slug}', [PagesController::class, 'volunteerDetails'])
+        ->name('volunteer.details');
+    Route::get('media-details/{slug}', [PagesController::class, 'mediaDetails'])
+        ->name('media.details');
 });
 
 
@@ -36,17 +45,18 @@ Route::group(['prefix'=>'admin','middleware'=>['auth', 'en_locale']],function ()
     Route::get('profile',[App\Http\Controllers\profileController::class,'profile'])
         ->name('back.profile');
     Route::resource('option',App\Http\Controllers\OptionController::class);
-//    Home start
+
     Route::resource('menu',App\Http\Controllers\MenuController::class);
     Route::get('menu-deleter/{id}',[App\Http\Controllers\MenuController::class,'menuDeleter'])
         ->name('menu.deleter');
+    Route::get('shown/{id}',[App\Http\Controllers\MenuController::class,'shown'])
+        ->name('menu.shown');
     Route::resource('banner',App\Http\Controllers\BannerController::class);
     Route::resource('mission',App\Http\Controllers\MissionController::class);
     Route::resource('involve',App\Http\Controllers\InvolveController::class);
     Route::resource('press',App\Http\Controllers\PressController::class);
     Route::resource('pmission',App\Http\Controllers\PMissionController::class);
-//    Home end
-//    Who are N.A.C start
+
     Route::resource('subscribe',App\Http\Controllers\SubscribeController::class);
     Route::get('who/{section}',[App\Http\Controllers\WhoController::class, 'index'])
         ->name('back.who');
@@ -73,16 +83,32 @@ Route::group(['prefix'=>'admin','middleware'=>['auth', 'en_locale']],function ()
     Route::post('page-banner-post',[App\Http\Controllers\OptionController::class, 'pageBannerPost'])
         ->name('back.page.banner.post');
 
-//    Who are N.A.C end
-//    OUR ADVOCACY start
-    //    Current issues start
     Route::resource('current-issues-banner',App\Http\Controllers\CurrentIssuesBannerController::class);
     Route::resource('current-issues-category',App\Http\Controllers\CurrentIssuesCategoryController::class);
-    //    Current issues start
-//    OUR ADVOCACY end
 
     Route::get('blog/{id}',[BlogController::class,'blogIndex'])
         ->name('blog.index');
+
+    Route::resource('blog',\App\Http\Controllers\BlogController::class);
+    Route::get('blog-list/{menu_id}', [\App\Http\Controllers\BlogController::class, 'blogList'])->name('blog.list');
+    Route::get('blog-create/{menu_id}', [\App\Http\Controllers\BlogController::class, 'blogCreate'])->name('blog.create');
+    Route::get('blog-edit/{menu_id}/{id}', [\App\Http\Controllers\BlogController::class, 'blogEdit'])->name('blog.edit');
+    Route::get('blog-past/{menu_id}/{id}', [\App\Http\Controllers\BlogController::class, 'blogPast'])->name('blog.past');
+    Route::get('blog-image-deleter/{id}', [\App\Http\Controllers\BlogController::class, 'blogImageDeleter'])->name('blog.image.deleter');
+    Route::post('blog-cover', [\App\Http\Controllers\BlogController::class, 'is_cover'])->name('blog.is_cover');
+
+    Route::get('become-member-text',[\App\Http\Controllers\OptionController::class,'becomeMemberText'])
+        ->name('become.member.text');
+    Route::post('become-member-text',[\App\Http\Controllers\OptionController::class,'becomeMemberTextPost'])
+        ->name('become.member.text.post');
+    Route::resource('membership',\App\Http\Controllers\MembershipController::class);
+    Route::post('membership-other-fields',[\App\Http\Controllers\OptionController::class,'membershipOtherFields'])
+        ->name('membership.other.fields');
+
+    Route::get('media-text',[\App\Http\Controllers\OptionController::class,'mediaText'])
+        ->name('media.text');
+    Route::post('media-text',[\App\Http\Controllers\OptionController::class,'mediaTextPost'])
+        ->name('media.text.post');
 });
 
 

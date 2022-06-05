@@ -182,4 +182,111 @@ class OptionController extends Controller
         toastSuccess('Data added successfully');
         return redirect()->back();
     }
+
+    public function becomeMemberText()
+    {
+        return view('back.pages.member.become-member');
+    }
+
+    public function becomeMemberTextPost(Request $request)
+    {
+        $this->validate($request,[
+            'text_az'=>'nullable|max:60000',
+            'text_en'=>'nullable|max:60000'
+        ],[],[
+            'text_az'=>'Text(AZ)',
+            'text_en'=>'Text(EN)',
+        ]);
+
+        foreach ($request->keys() as $key)
+        {
+            if ($key != '_token')
+            {
+                Option::updateOrCreate(
+                    ['key'   => 'become_member_'.$key],
+                    [
+                        'value' => $request->post($key)
+                    ]
+                );
+            }
+        }
+
+        toastr()->success('Data added successfully');
+        return redirect()->back();
+    }
+
+    public function membershipOtherFields(Request $request)
+    {
+        $this->validate($request,[
+            'title_az'=>'nullable|max:60000',
+            'title_en'=>'nullable|max:60000'
+        ],[],[
+            'title_az'=>'Text(AZ)',
+            'title_en'=>'Text(EN)',
+        ]);
+
+        foreach ($request->keys() as $key)
+        {
+            if ($key != '_token')
+            {
+                Option::updateOrCreate(
+                    ['key'   => 'become_member_'.$key],
+                    [
+                        'value' => $request->post($key)
+                    ]
+                );
+            }
+        }
+    }
+
+    public function mediaText()
+    {
+        return view('back.pages.media.media-text');
+    }
+
+    public function mediaTextPost(Request $request)
+    {
+        $this->validate($request,[
+            'src'=>'nullable|max:2048',
+            'title_az'=>'nullable|max:255',
+            'title_en'=>'nullable|max:255',
+            'text_az'=>'nullable|max:60000',
+            'text_en'=>'nullable|max:60000'
+        ],[],[
+            'src'=>'Photo',
+            'title_az'=>'Title(AZ)',
+            'title_en'=>'Title(EN)',
+            'text_az'=>'Text(AZ)',
+            'text_en'=>'Text(EN)',
+        ]);
+
+        foreach ($request->keys() as $key)
+        {
+            if ($key != '_token')
+            {
+                if ($key == 'src')
+                {
+                    $src   = $this->fileUpdate(\App\Helpers\Options::getOption('media_src'), $request->hasFile('src'), $request->src, 'files/media/');
+                    Option::updateOrCreate(
+                        ['key'   => 'media_src'],
+                        [
+                            'value' => $src
+                        ]
+                    );
+                }
+                else
+                {
+                    Option::updateOrCreate(
+                        ['key'   => 'media_'.$key],
+                        [
+                            'value' => $request->post($key)
+                        ]
+                    );
+                }
+            }
+        }
+
+        toastr()->success('Data added successfully');
+        return redirect()->back();
+    }
 }

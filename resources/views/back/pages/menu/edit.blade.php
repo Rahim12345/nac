@@ -16,6 +16,7 @@
             <form action="{{ route('menu.update',$menu->id) }}" method="POST" enctype="multipart/form-data" class="mb-5">
             @csrf
             @method('PUT')
+            @if(!$menu->default)
             <div class="row mt-3">
                 <div class="form-group mb-3 col-md-4">
                     @if($menu->src != '')
@@ -29,7 +30,9 @@
 
                 </div>
             </div>
+            @endif
             <div class="row">
+                @if(!$menu->default)
                 <div class="form-group mb-3 col-md-4">
                     <label class="form-label" for="src">Banner</label>
                     <input type="file" class="form-control @error('src') is-invalid  @enderror" id="src" name="src">
@@ -37,6 +40,7 @@
                     <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
+                @endif
 
                 <div class="form-group mb-3 col-md-4">
                     <label class="form-label" for="link">Parent</label>
@@ -66,6 +70,7 @@
                     @enderror
                 </div>
 
+                @if(!$menu->default)
                 <div class="form-group mb-3 col-md-4">
                     <label class="form-label" for="title_az">Title(AZ)</label>
                     <input type="text" class="form-control @error('title_az') is-invalid  @enderror" name="title_az" id="title_az" value="{{ old('title_az',$menu->title_az) }}">
@@ -120,6 +125,7 @@
                     <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
+                @endif
             </div>
             <div class="form-group mb-3">
                 <button class="btn btn-primary float-end">EDIT</button>

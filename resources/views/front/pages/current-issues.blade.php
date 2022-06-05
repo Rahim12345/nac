@@ -63,26 +63,7 @@
                                 <div>{!! $issue->{'title_'.app()->getLocale()} !!}</div>
                                 {!! $issue->{'text_'.app()->getLocale()} !!}
                             </div>
-
-                            <div class="share">
-                                <span>Share:</span>
-                                <ul>
-                                    <li class="li active">
-                                        <a class="button fb fb-share" href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode(env('APP_URL').'/current-issues#'.$issue->{'slug_'.app()->getLocale()}) }}">FACEBOOK</a>
-                                    </li>
-                                    <li class="li">
-                                        <a class="button tw twitPop" href="https://twitter.com/intent/tweet?url={{ urlencode(env('APP_URL').'/current-issues#'.$issue->{'slug_'.app()->getLocale()}) }}">TWITTER</a>
-                                    </li>
-                                    <li class="li">
-                                        <a class="button pr" href="javascript:(0)">PRINT</a>
-                                    </li>
-                                    <li class="li">
-                                        <a class="button cl" href="javascript:(0)" onclick="copyToClipboard('{!! env('APP_URL').'/current-issues#'.$issue->{'slug_'.app()->getLocale()} !!}')">COPY LINK</a>
-                                    </li>
-                                </ul>
-                            </div>
-
-
+                        @include('front.includes.share')
                         </div>
                         @endforeach
                     </div>

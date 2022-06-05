@@ -30,6 +30,9 @@ class CreateMenusTable extends Migration
             $table->boolean('default')
                 ->default(1)
                 ->comment('1 - default, 0 - then added');
+            $table->boolean('shown')
+                ->default(1)
+                ->comment('1 - default, 0 - then hide');
             $table->boolean('parent_id')
                 ->default(0)
                 ->comment('0 - parent');

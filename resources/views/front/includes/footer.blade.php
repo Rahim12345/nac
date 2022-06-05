@@ -12,45 +12,65 @@
 
             <div class="box col-lg-3 col-md-6">
                 <div class="footer-menu">
-                    <a href="">Who we are</a>
-                    <a href="javascript:(0)">Our Advocacy</a>
-                    <a href="javascript:(0)">Current issues</a>
-                    <a href="javascript:(0)">Take action</a>
-                    <a href="javascript:(0)">Find your representative</a>
+                    @foreach($menus as $menu)
+                        @if($menu->id == 1)
+                            <a href="{{ $menu->{'slug_'.app()->getLocale()} }}">{{ $menu->{'menu_'.app()->getLocale()} }}</a>
+                        @elseif($menu->id == 2)
+                            <a href="javascript:(0)">{{ $menu->{'menu_'.app()->getLocale()} }}</a>
+                            @foreach($menu->children as $sub_menu)
+                                @if($sub_menu->shown)
+                                @if(filter_var($sub_menu->{'slug_'.app()->getLocale()}, FILTER_VALIDATE_URL))
+                                    <a href="{{ $sub_menu->{'slug_'.app()->getLocale()} }}">{{ $sub_menu->{'menu_'.app()->getLocale()} }}</a>
+                                @else
+                                    <a href="{{ route('front.menu',['slug'=>$sub_menu->{'slug_'.app()->getLocale()}]) }}">{{ $sub_menu->{'menu_'.app()->getLocale()} }}</a>
+                                @endif
+                                @endif
+                            @endforeach
+                        @endif
+                    @endforeach
                 </div>
             </div>
 
             <div class="box col-lg-3 col-md-6">
                 <div class="footer-menu">
-                    <a href="javascript:(0)">Press Centre</a>
-                    <a href="javascript:(0)">Statements</a>
-                    <a href="javascript:(0)">Media</a>
-                    <a href="javascript:(0)">Community updates</a>
+                    @foreach($menus as $menu)
+                        @if($menu->id == 6)
+                            <a href="javascript:(0)">{{ $menu->{'menu_'.app()->getLocale()} }}</a>
+                            @foreach($menu->children as $sub_menu)
+                                @if($sub_menu->shown)
+                                @if(filter_var($sub_menu->{'slug_'.app()->getLocale()}, FILTER_VALIDATE_URL))
+                                    <a href="{{ $sub_menu->{'slug_'.app()->getLocale()} }}">{{ $sub_menu->{'menu_'.app()->getLocale()} }}</a>
+                                @else
+                                    <a href="{{ route('front.menu',['slug'=>$sub_menu->{'slug_'.app()->getLocale()}]) }}">{{ $sub_menu->{'menu_'.app()->getLocale()} }}</a>
+                                @endif
+                                @endif
+                            @endforeach
+                        @endif
+                    @endforeach
                 </div>
             </div>
 
             <div class="box col-lg-3 col-md-6">
                 <div class="footer-contact">
                     <span><a href="javascript:(0)">Contact</a></span>
-                    <span>Mail: <a href="javascript:(0)">info@azcanet.ca</a></span>
+                    <span>Mail: <a href="mailto:{{ \App\Helpers\Options::getOption('email') }}">{{ \App\Helpers\Options::getOption('email') }}</a></span>
 
-                    <span>Phone: <a href="javascript:(0)">1234567890</a></span>
-                    <span>Address: <a href="javascript:(0)">1111 Finch Avenue West, <br> Unit 218 Toronto, ON,
-                                Canada </a></span>
+                    <span>Phone: <a href="tel:{{ \App\Helpers\Options::getOption('tel') }}">{{ \App\Helpers\Options::getOption('tel') }}</a></span>
+                    <span>Address: <a href="javascript:(0)">{{ \App\Helpers\Options::getOption('unvan_'.app()->getLocale()) }}</a></span>
                     <div class="socials">
                         <ul>
                             <li>
-                                <a href="javascript:(0)">
+                                <a href="{{ \App\Helpers\Options::getOption('facebook') }}">
                                     <i class="fa-brands fa-facebook"></i>
                                 </a>
                             </li>
                             <li>
-                                <a href="javascript:(0)">
+                                <a href="{{ \App\Helpers\Options::getOption('instagram') }}">
                                     <i class="fa-brands fa-instagram"></i>
                                 </a>
                             </li>
                             <li>
-                                <a href="javascript:(0)">
+                                <a href="{{ \App\Helpers\Options::getOption('youtube') }}">
                                     <i class="fa-brands fa-youtube"></i>
                                 </a>
                             </li>
@@ -82,6 +102,8 @@
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
 <script type="text/javascript"  src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 <script type="text/javascript"  src="{{ asset('nac') }}/js/main.js"></script>
+<script async src="https://www.google.com/recaptcha/api.js?render={{ env('RECAPTCHAV3_SITEKEY') }}"></script>
+<script type="text/javascript"  src="{{ asset('front/js/subscribe.js') }}"></script>
 @toastr_js
 @toastr_render
 @yield('js')

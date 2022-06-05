@@ -17,4 +17,14 @@ class Blog extends Model
     {
         return $this->hasOne(Menu::class,'id','menu_id');
     }
+
+    public function images()
+    {
+        return $this->hasMany(BlogImages::class,'blog_id','id');
+    }
+
+    public function cover()
+    {
+        return $this->hasOne(BlogImages::class,'blog_id','id')->where('is_cover',1);
+    }
 }

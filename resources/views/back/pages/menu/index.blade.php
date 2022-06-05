@@ -40,6 +40,7 @@
                                     <a href="{{ route('menu.deleter',$item->id) }}" class="mb-3 float-end btn btn-danger btn-sm" onclick="if (confirm('Delete selected item?')){return true;}else{event.stopPropagation(); event.preventDefault();};"><i class="fa fa-times"></i></a>
                                     @endif
                                     <a href="{{ route('menu.edit',$item->id) }}" class="mb-3 float-end btn btn-primary btn-sm"><i class="fa fa-pen"></i></a>
+                                    <a href="{{ route('menu.shown',$item->id) }}" class="mb-3 float-end btn btn-success btn-sm"><i class="fa fa-eye{{ $item->shown ? '' : '-slash' }}"></i></a>
                                 </p>
                                 @if($item->children->count() > 0)
                                 @foreach($item->children as $submenu)
@@ -48,6 +49,11 @@
                                         <a href="{{ route('menu.deleter',$submenu->id) }}" class="mb-3 float-end btn btn-danger btn-sm" onclick="if (confirm('Delete selected item?')){return true;}else{event.stopPropagation(); event.preventDefault();};"><i class="fa fa-times"></i></a>
                                         @endif
                                         <a href="{{ route('menu.edit',$submenu->id) }}" class="mb-3 float-end btn btn-primary btn-sm"><i class="fa fa-pen"></i></a>
+                                        @if($item->shown)
+                                        <a href="{{ route('menu.shown',$submenu->id) }}" class="mb-3 float-end btn btn-success btn-sm"><i class="fa fa-eye{{ $submenu->shown ? '' : '-slash' }}"></i></a>
+                                        @else
+                                            <a href="{{ route('menu.shown',$submenu->id) }}" class="mb-3 float-end btn btn-success btn-sm" style="pointer-events: none;cursor: default;"><i class="fa fa-eye-slash"></i></a>
+                                        @endif
                                     </p>
                                 @endforeach
                                 @endif

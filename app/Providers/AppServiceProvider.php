@@ -28,7 +28,7 @@ class AppServiceProvider extends ServiceProvider
         $menus          = [];
         if (Schema::hasTable('menus'))
         {
-            $menus = Menu::all();
+            $menus = Menu::where('shown',1)->get();
         }
 
         return view()->share([
